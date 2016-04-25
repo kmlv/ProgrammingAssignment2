@@ -2,14 +2,52 @@
 ## functions do
 
 ## Write a short comment describing this function
+  ## this is virtually the same as in the example: seting and getting
+  ## the matrix we want to invert, and then setting and getting the 
+  ## value of the inverser we want to calculate based on x. 
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  m <- NULL
+  set <- function(y) {
+    x <<- y
+    m <<- NULL
+  }
+  get <- function() x
+  setInverse <- function(Inverse) m <<- Inverse
+  getInverse <- function() m
+  list(set = set, get = get,
+       setInverse = setInverse,
+       getInverse = getInverse)
 }
+
+
 
 
 ## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  ## cacheSolve returns a matrix that is the inverse of 'x'
+  ## first check if a previous inverse has been stored AND
+  ## that the stored inverse is for an identical matrix as 'x'
+  ## if so returns the cached inverser
+  ## if not (if not, makeCache not been run or x has changed) then calculates
+  ## the inverse of x from scratch and reports it
+
+cacheSolve <- function(list, x, ...) {
+  
+  m <- list$getInverse()
+  
+  if( !is.null(m) & identical(x, list$get()) ) {
+    
+    message("getting cached data, x has not changed the same")
+    return(m)
+  }
+  
+  message("x has changed since you run makeCacheMatrix(x)")
+
+  data <- x    # old version: data <- list$get()
+
+  m <- solve(data, ...)
+  list$setInverse(m)
+  
+  m
 }
