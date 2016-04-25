@@ -1,7 +1,13 @@
-## Put comments here that give an overall description of what your
-## functions do
 
-## Write a short comment describing this function
+## the following two functions calculate/report the inverse of a matrix in an efficient 
+# manner. when the matrix x has been inverted previously and x has not changed since 
+# last time was called, then stored values of its inverse are reported. See example 
+# on how to use these functions at the very end of this script.
+
+
+
+
+## makeCacheMatrix
   ## this is virtually the same as in the example: seting and getting
   ## the matrix we want to invert, and then setting and getting the 
   ## value of the inverser we want to calculate based on x. 
@@ -23,7 +29,8 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 
-## Write a short comment describing this function
+
+## cacheSolve
 
   ## cacheSolve returns a matrix that is the inverse of 'x'
   ## first check if a previous inverse has been stored AND
@@ -51,3 +58,26 @@ cacheSolve <- function(list, x, ...) {
   
   m
 }
+
+
+
+
+
+
+# Example:
+# > c=rbind(c(1, -1/4), c(7, 3))
+# > list <- makeCacheMatrix(c)
+# > cacheSolve(list, c)
+# getting cached data, x has not changed the same
+# [,1]       [,2]
+# [1,]  0.6315789 0.05263158
+# [2,] -1.4736842 0.21052632
+# >  c=rbind(c(1, -1/4), c(7, 4))
+# >  cacheSolve(list, c)
+# x has changed since you run makeCacheMatrix(x)
+# [,1]       [,2]
+# [1,]  0.6956522 0.04347826
+# [2,] -1.2173913 0.17391304
+
+
+
